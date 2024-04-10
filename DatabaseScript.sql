@@ -89,17 +89,11 @@ SELECT AVG(grade) FROM grade WHERE AssignmentID = 1;
 Select Max(grade) FROM grade WHERE AssignmentID = 1;
 Select MIN(grade) FROM grade WHERE AssignmentID = 1;
 #List all students in a course
-SELECT s.FirstName, s.LastName 
-FROM Student s 
-JOIN Grade g ON s.StudentID = g.StudentID 
-JOIN Assignment a ON g.AssignmentID = a.AssignmentID 
-JOIN Category c ON a.CategoryId = c.CategoryID 
-JOIN Course crs ON c.CourseID = crs.CourseID 
-WHERE crs.CourseID = 1;
+SELECT DISTINCT s.FirstName, s.LastName FROM Student s JOIN Grade g ON s.StudentID = g.StudentID JOIN Assignment a ON g.AssignmentID = a.AssignmentID JOIN Category c ON a.CategoryId = c.CategoryID JOIN Course crs ON c.CourseID = crs.CourseID WHERE crs.CourseID = 1;
 #List all students and all scores of every assignment	
 SELECT s.FirstName, s.LastName, a.AssignmentName, g.Grade FROM Student s JOIN Grade g ON s.StudentID = g.StudentID JOIN Assignment a ON g.AssignmentID = a.AssignmentID;
 #Add assignment to course
-INSERT INTO Assignment(CourseID, AssignmentName, CategoryID) VALUES (1, 'Final Exam', 1); #assignmentID 1
+INSERT INTO Assignment(CourseID, AssignmentName, CategoryID) VALUES (1, 'Final Exam', 3); #assignmentID 1
 #Change Percentages of categories for course
 UPDATE Category SET Weight = 30 WHERE CategoryID = 1;
 #Add 2 points to each student on assignment
